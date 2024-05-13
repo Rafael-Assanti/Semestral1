@@ -14,10 +14,12 @@ public class Tela extends JFrame implements ActionListener, MouseListener
     String ultimoString, antString, answString, op ;
     int gira;
     double ant, answ;
+    int x[][];
 	public Tela()
     {
 		super("Nome da tela");
 
+        x = new int[10][10];
 
 
         fundo = new Color(24,24,24);
@@ -46,10 +48,6 @@ public class Tela extends JFrame implements ActionListener, MouseListener
                 botoes[i][j].addMouseListener(this);
             }
         }
-
-
-
-
     }    
 
     public void actionPerformed(ActionEvent e) //IGNORA ISSO AQUI (N fiz ainda) -------------------
@@ -61,38 +59,44 @@ public class Tela extends JFrame implements ActionListener, MouseListener
         for (int j = 0; j<10;j++){
             for (int i = 0; i<10;i++){
                 if(e.getSource()==botoes[j][i]){
-                    // if(i < 8 && gira == 0){
-                    //     botoes[j][i].setOpaque(false);
-                    //     botoes[j][i].setContentAreaFilled(false);
-                    //     botoes[j][i].setBorderPainted(false);
-                    //     botoes[j][i].setEnabled(false);
+                    if((i < 8 && gira == 0) && x[j][i] == 0 && x[j][i+1] == 0 && x[j][i+2] == 0){
+                        botoes[j][i].setOpaque(false);
+                        botoes[j][i].setContentAreaFilled(false);
+                        botoes[j][i].setBorderPainted(false);
+                        botoes[j][i].setEnabled(false);
+                        x[j][i] = 1;
 
-                    //     botoes[j][i+1].setOpaque(false);
-                    //     botoes[j][i+1].setContentAreaFilled(false);
-                    //     botoes[j][i+1].setBorderPainted(false);
-                    //     botoes[j][i+1].setEnabled(false);
+                        botoes[j][i+1].setOpaque(false);
+                        botoes[j][i+1].setContentAreaFilled(false);
+                        botoes[j][i+1].setBorderPainted(false);
+                        botoes[j][i+1].setEnabled(false);
+                        x[j][i+1] = 1;
 
-                    //     botoes[j][i+2].setOpaque(false);
-                    //     botoes[j][i+2].setContentAreaFilled(false);
-                    //     botoes[j][i+2].setBorderPainted(false);
-                    //     botoes[j][i+2].setEnabled(false);
-                    // }
-                    // else if(i < 8 && gira == 1){
-                    //     botoes[j][i].setOpaque(false);
-                    //     botoes[j][i].setContentAreaFilled(false);
-                    //     botoes[j][i].setBorderPainted(false);
-                    //     botoes[j][i].setEnabled(false);
+                        botoes[j][i+2].setOpaque(false);
+                        botoes[j][i+2].setContentAreaFilled(false);
+                        botoes[j][i+2].setBorderPainted(false);
+                        botoes[j][i+2].setEnabled(false);
+                        x[j][i+2] = 1;
+                    }
+                    else if((i < 8 && gira == 1) && x[j][i] == 0 && x[j+1][i] == 0 && x[j+2][i] == 0){
+                        botoes[j][i].setOpaque(false);
+                        botoes[j][i].setContentAreaFilled(false);
+                        botoes[j][i].setBorderPainted(false);
+                        botoes[j][i].setEnabled(false);
+                        x[j][i] = 1;
 
-                    //     botoes[j+1][i].setOpaque(false);
-                    //     botoes[j+1][i].setContentAreaFilled(false);
-                    //     botoes[j+1][i].setBorderPainted(false);
-                    //     botoes[j+1][i].setEnabled(false);
+                        botoes[j+1][i].setOpaque(false);
+                        botoes[j+1][i].setContentAreaFilled(false);
+                        botoes[j+1][i].setBorderPainted(false);
+                        botoes[j+1][i].setEnabled(false);
+                        x[j+1][i] = 1;
 
-                    //     botoes[j+2][i].setOpaque(false);
-                    //     botoes[j+2][i].setContentAreaFilled(false);
-                    //     botoes[j+2][i].setBorderPainted(false);
-                    //     botoes[j+2][i].setEnabled(false);
-                    // }
+                        botoes[j+2][i].setOpaque(false);
+                        botoes[j+2][i].setContentAreaFilled(false);
+                        botoes[j+2][i].setBorderPainted(false);
+                        botoes[j+2][i].setEnabled(false);
+                        x[j+2][i] = 1;
+                    }
                 }
             }
         }
@@ -111,7 +115,12 @@ public class Tela extends JFrame implements ActionListener, MouseListener
                             botoes[j][i].setBackground(Color.RED);
                             botoes[j][i+1].setBackground(Color.RED);
                             }
-                            else{ //O usuario pode colocar o barco aqui
+                            else if(x[j][i] == 1 || x[j][i+1] == 1 || x[j][i+2] == 1){ //O usuario pode colocar o barco aqui
+                                botoes[j][i].setBackground(Color.RED);
+                                botoes[j][i+1].setBackground(Color.RED);
+                                botoes[j][i+2].setBackground(Color.RED);
+                            }
+                            else{
                                 botoes[j][i].setBackground(Color.GREEN);
                                 botoes[j][i+1].setBackground(Color.GREEN);
                                 botoes[j][i+2].setBackground(Color.GREEN);
@@ -132,6 +141,11 @@ public class Tela extends JFrame implements ActionListener, MouseListener
                             botoes[o][p].setBackground(Color.RED); //Pinta o fundo de vermelho
                             botoes[o+1][p].setBackground(Color.RED); //Pinta o fundo de vermelho
                             
+                            }
+                            else if(x[o][p] == 1 || x[o+1][p] == 1 || x[o+2][p] == 1){ //O usuario pode colocar o barco aqui
+                                botoes[o][p].setBackground(Color.RED);
+                                botoes[o+1][p].setBackground(Color.RED);
+                                botoes[o+2][p].setBackground(Color.RED);
                             }
                             else{ //O usuario pode colocar o barco aqui
                                 botoes[o][p].setBackground(Color.GREEN); //Pinta o fundo de verde
@@ -156,8 +170,8 @@ public class Tela extends JFrame implements ActionListener, MouseListener
                                 botoes[j][i].setBackground(UIManager.getColor("control"));
                             }
                             else if(i ==8){
-                            botoes[j][i].setBackground(UIManager.getColor("control"));
-                            botoes[j][i+1].setBackground(UIManager.getColor("control"));
+                                botoes[j][i].setBackground(UIManager.getColor("control"));
+                                botoes[j][i+1].setBackground(UIManager.getColor("control"));
                             }
                             else{
                                 botoes[j][i].setBackground(UIManager.getColor("control"));
@@ -176,8 +190,8 @@ public class Tela extends JFrame implements ActionListener, MouseListener
                                 botoes[o][p].setBackground(UIManager.getColor("control"));
                             }
                             else if(o ==8){
-                            botoes[o][p].setBackground(UIManager.getColor("control")); //Restaura a cor pra antes do vermelho/verde
-                            botoes[o+1][p].setBackground(UIManager.getColor("control"));
+                                botoes[o][p].setBackground(UIManager.getColor("control")); //Restaura a cor pra antes do vermelho/verde
+                                botoes[o+1][p].setBackground(UIManager.getColor("control"));
                             
                             }
                             else{
